@@ -11,10 +11,21 @@
   <div class="container">
     <h2>Adicionar Categoria</h2>
 
-    <form action="/categoria/add" method="POST" class="form-padrao">
+    <!-- IMPORTANTE: enctype para permitir upload de imagem -->
+    <form action="/categoria/add" 
+          method="POST" 
+          enctype="multipart/form-data" 
+          class="form-padrao">
+
       <div class="form-group">
         <label for="nome">Nome da Categoria:</label>
         <input type="text" id="nome" name="nome" required />
+      </div>
+
+      <!-- Campo da imagem -->
+      <div class="form-group">
+        <label for="imagem">Imagem da Categoria:</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" />
       </div>
 
       <div class="botoes-centro">

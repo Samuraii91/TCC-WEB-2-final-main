@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="/css/styleSite.css">
 </head>
 <body>
+   <!-- Cabeçalho -->
 <header class="topo">
     <div class="container">
         <div class="logo-container">
-            <div class="logo-icon">📍</div>
-            <div>
+            <img src="/img/logo.png" class="logo-icon" alt="Logo Novo Belém">
+            <div class="logo-textos">
                 <h1>Novo Belém</h1>
-                <p class="subtitulo">Argamassa e Ferragem</p>
+                <span class="subtitulo">Argamassa e Ferragem</span>
             </div>
         </div>
 
@@ -23,52 +24,71 @@
         <nav class="menu">
             <a href="#servicos">Categorias</a>
             <a href="#produtos">Produtos</a>
-            <a href="#contato">Contato</a>
+            <a href="#contato">Orçamento</a>
             <a href="#localizacao">Localização</a>
         </nav>
     </div>
 </header>
 
-<section class="hero">
-    <div class="container hero-content">
-        <h2>Materiais de Qualidade para sua Obra</h2>
-        <p>Os melhores preços e atendimento personalizado</p>
-        <div class="hero-info">
-            <div class="info-item"><span class="icon">📞</span> (53) 991027296</div>
-            <div class="info-item"><span class="icon">✉️</span> profevinicius@gmail.com</div>
-            <div class="info-item"><span class="icon">🕐</span> Seg–Sex / Sáb</div>
-        </div>
-    </div>
-</section>
 
-<!-- CATEGORIAS -->
-<section id="servicos" class="secao">
-    <div class="container">
-        <h2 class="titulo-secao">Nossas Categorias</h2>
-        <div class="grid-servicos">
-
-            <% categorias.forEach(cat => { %>
-                <div class="card-servico">
-                    <img 
-                        src="<%= cat.imagem ? cat.imagem : 'https://via.placeholder.com/300x200?text=Sem+Imagem' %>" 
-                        alt="<%= cat.nome %>">
-
-                    <div class="card-content">
-                        <h3><%= cat.nome %></h3>
-                        <p><%= cat.descricao %></p>
-                    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h2>Materiais de Qualidade para sua Obra</h2>
+            <p>Os melhores preços e atendimento personalizado</p>
+            <div class="hero-info">
+                <div class="info-item">
+                    <span class="icon">📞</span>
+                    <span>(53) 991027296</span>
                 </div>
-            <% }) %>
-
-            <% if (categorias.length === 0) { %>
-                <p style="padding: 20px; font-size: 18px; text-align:center;">
-                    Nenhuma categoria cadastrada ainda.
-                </p>
-            <% } %>
-
+                <div class="info-item">
+                    <span class="icon">✉️</span>
+                    <span>profevinicius@gmail.com</span>
+                </div>
+                <div class="info-item">
+                    <span class="icon">🕐</span>
+                    <span>Seg-Sex: (8h-12h) e (13:30-17:30h) | Sáb: 8h-12h</span>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- ============================== -->
+    <!-- CATEGORIAS DINÂMICAS          -->
+    <!-- ============================== -->
+    <section id="servicos" class="secao">
+        <div class="container">
+            <h2 class="titulo-secao">Nossas Categorias</h2>
+
+            <div class="grid-servicos">
+
+                <% categorias.forEach(cat => { %>
+                    <div class="card-servico">
+                       <img 
+    src="<% if (cat.imagemBase64) { %>
+            data:<%= cat.mimetype %>;base64,<%= cat.imagemBase64 %>
+         <% } else { %>
+            https://via.placeholder.com/300x200?text=Sem+Imagem
+         <% } %>"
+    alt="<%= cat.nome %>"
+>
+                        <div class="card-content">
+                            <h3><%= cat.nome %></h3>
+                            <p><%= cat.descricao %></p>
+                        </div>contato
+                    </div>
+                <% }) %>
+
+                <% if (categorias.length === 0) { %>
+                    <p style="padding: 20px; font-size: 18px; text-align:center;">
+                        Nenhuma categoria cadastrada ainda.
+                    </p>
+                <% } %>
+
+            </div>
+        </div>
+    </section>
+
 
 <!-- PRODUTOS -->
 <section id="produtos" class="secao secao-cinza">
@@ -79,7 +99,7 @@
             <% produtos.forEach(prod => { %>
                 <div class="card-produto">
                     <img 
-                        src="<%= prod.imagem ? prod.imagem : 'https://via.placeholder.com/300x200?text=Sem+Imagem' %>"
+                        src="<%= prod.imagemBase64 ? `data:${prod.mimetype};base64,${prod.imagemBase64}` : 'https://via.placeholder.com/300x200?text=Sem+Imagem' %>"
                         alt="<%= prod.nome %>">
 
                     <div class="produto-info">
@@ -104,13 +124,110 @@
     </div>
 </section>
 
-<!-- LOCALIZAÇÃO (mantido) -->
-<!-- ... resto do seu código sem alteração ... -->
-
-<footer class="rodape">
+    <!-- ============================== -->
+<!-- LOCALIZAÇÃO                    -->
+<!-- ============================== -->
+<section id="localizacao" class="secao">
     <div class="container">
-        <p>&copy; 2025 Novo Belém - Argamassa e Ferragem. Todos os direitos reservados.</p>
+        <h2 class="titulo-secao">Nossa Localização</h2>
+        <div class="grid-localizacao">
+            
+            <div class="card-localizacao">
+                <div class="localizacao-info">
+                    <div class="info-header">
+                        <span class="icon-grande">📍</span>
+                        <h3>Endereço</h3>
+                    </div>
+                    <p>
+                        Rua Próspero Ambrósio Pesce, 220<br>
+                        Bairro Passo do Príncipe<br>
+                        Bagé - RS<br>
+                        CEP 96400-000
+                    </p>
+                </div>
+
+                <div class="horario-info">
+                    <h4>Horário de Funcionamento</h4>
+                    <p>Segunda a Sexta: (8h-12h) e (13:30-17:30h)</p>
+                    <p>Sábado: Sáb: 8h-12h</p>
+                    <p>Domingo: Fechado</p>
+                </div>
+            </div>
+
+            <div class="mapa">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3292.5216540441243!2d-54.107494729870226!3d-31.344687084025722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9506750d27fd612d%3A0xf778add48b04070!2sArgamassa%20e%20Material%20de%20Constru%C3%A7%C3%A3o%20Novo%20Bel%C3%A9m!5e0!3m2!1spt-BR!2sbr!4v1763379837572!5m2!1spt-BR!2sbr"
+                    width="100%"
+                    height="400"
+                    style="border:0; border-radius: 12px;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+
+        </div>
     </div>
-</footer>
+</section>
+
+    <!-- ============================== -->
+<!-- CONTATO                        -->
+<!-- ============================== -->
+<section id="contato" class="secao secao-cinza">
+    <div class="container">
+        <h2 class="titulo-secao">Entre em Contato</h2>
+        <div class="formulario-container">
+<form class="formulario" action="https://formspree.io/f/xrbwqlzb" method="POST">
+
+    <input type="hidden" name="_replyto" value="profevinicius@gmail.com">
+    <input type="hidden" name="_subject" value="Novo Contato do Site Novo Belém">
+
+    <div class="form-group">
+        <label for="nome">Nome *</label>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email">E-mail *</label>
+        <input type="email" id="email" name="email" placeholder="seuemail@gmail.com" required>
+    </div>
+
+    <div class="form-group">
+        <label for="telefone">Telefone *</label>
+        <input type="tel" id="telefone" name="telefone" placeholder="(53) 991027296" required>
+    </div>
+
+    <div class="form-group">
+        <label for="produto">Produto de Interesse</label>
+        <select id="produto" name="produto">
+            <option value="">Selecione um produto</option>
+            <% produtos.forEach(prod => { %>
+                <option value="<%= prod.nome %>">
+                    <%= prod.nome %> - R$ <%= prod.preco %>
+                </option>
+            <% }) %>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="mensagem">Mensagem *</label>
+        <textarea id="mensagem" name="mensagem" placeholder="Descreva sua necessidade ou dúvida" rows="5" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-azul">Enviar Mensagem</button>
+</form>
+
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- Rodapé -->
+    <footer class="rodape">
+        <div class="container">
+            <p>&copy; 2025 Novo Belém - Argamassa e Ferragem. Todos os direitos reservados.</p>
+            <p class="rodape-info">Rua Próspero Ambrósio Pesce, 220 - Bairro Passo do Príncipe - Bagé, RS - CEP 96400-000</p>
+        </div>
+    </footer>
 </body>
 </html>

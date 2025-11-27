@@ -15,7 +15,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 50px;
 }
 
 /* Scroll suave */
@@ -35,46 +35,51 @@ html {
 }
 
 .topo .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* logo à esquerda, menu à direita */
+    padding: 0 50px;
 }
 
 .logo-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    display: flex;
+    align-items: center; /* logo e textos alinhados verticalmente */
+    gap: 12px;
 }
 
-.logo-icon {
-  background-color: white;
-  color: #003366;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.logo-textos {
+    display: flex;
+    flex-direction: column; /* título + subtítulo em coluna */
+    line-height: 1.2;
 }
 
 .logo-container h1 {
-  font-size: 24px;
-  margin: 0;
+    font-size: 24px;
+    margin: 0;
 }
 
 .subtitulo {
-  font-size: 14px;
-  color: #b3d9ff;
-  margin: 0;
+    font-size: 14px;
+    color: #b3d9ff;
+    margin: 0;
 }
 
+
+  .logo-icon {
+  width: 80px;        /* tamanho da sua logo */
+  height: auto;
+  display: block;
+  border-radius: 8px; /* opcional, se quiser cantos suaves */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+}
+
+
 .menu {
-  display: flex;
-  gap: 25px;
-  align-items: center;
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    margin-left: auto; /* empurra o menu para a direita */
 }
 
 .menu a {

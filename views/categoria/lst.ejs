@@ -25,6 +25,7 @@
     <table id="tabelaCategorias">
       <thead>
         <tr>
+          <th>Imagem</th>
           <th>Nome</th>
           <th>Ações</th>
         </tr>
@@ -32,9 +33,20 @@
       <tbody>
         <% categorias.forEach(cat => { %>
           <tr>
-            <td><%= cat.nome %></td>
             <td>
-              <!-- Botões organizados em um container -->
+              <% if (cat.imagemBase64) { %>
+                <img 
+                  src="data:<%= cat.mimetype %>;base64,<%= cat.imagemBase64 %>"
+                  alt="Imagem da Categoria"
+                  style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid #aaa;" />
+              <% } else { %>
+                <span style="color:#777;">Sem imagem</span>
+              <% } %>
+            </td>
+
+            <td><%= cat.nome %></td>
+
+            <td>
               <div class="action-buttons">
                 <a href="/categoria/edt/<%= cat._id %>" class="edit">Editar</a>
                 <a href="/categoria/del/<%= cat._id %>" class="del"

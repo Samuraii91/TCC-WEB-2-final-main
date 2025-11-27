@@ -11,10 +11,32 @@
   <div class="container">
     <h2>Editar Categoria</h2>
 
-    <form action="/categoria/edt/<%= categoria._id %>" method="POST" class="form-padrao">
+    <form action="/categoria/edt/<%= categoria._id %>" 
+          method="POST" 
+          enctype="multipart/form-data"
+          class="form-padrao">
+
       <div class="form-group">
         <label for="nome">Nome da Categoria:</label>
         <input type="text" id="nome" name="nome" value="<%= categoria.nome %>" required />
+      </div>
+
+      <!-- Imagem atual da categoria -->
+      <% if (categoria.imagemBase64) { %>
+        <div class="form-group">
+          <label>Imagem Atual:</label>
+          <img 
+            src="data:<%= categoria.mimetype %>;base64,<%= categoria.imagemBase64 %>" 
+            alt="Imagem da Categoria" 
+            style="max-width: 150px; display: block; margin-bottom: 10px; border: 1px solid #aaa; padding: 5px; border-radius: 5px;"
+          />
+        </div>
+      <% } %>
+
+      <!-- Campo para enviar nova imagem -->
+      <div class="form-group">
+        <label for="imagem">Nova Imagem (opcional):</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*" />
       </div>
 
       <div class="botoes-centro">

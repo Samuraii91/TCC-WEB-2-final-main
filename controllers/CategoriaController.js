@@ -9,7 +9,22 @@ export default class CategoriaController {
   // Adicionar categoria
   async add(req, res) {
     const { nome } = req.body;
-    await Categoria.create({ nome });
+
+    let imagemBase64 = null;
+    let mimetype = null;
+
+    // Se o usuário enviou uma imagem
+    if (req.file) {
+      imagemBase64 = req.file.buffer.toString("base64");
+      mimetype = req.file.mimetype;
+    }
+
+    await Categoria.create({
+      nome,
+      imagemBase64,
+      mimetype
+    });
+
     res.redirect("/categoria/lst");
   }
 
@@ -28,7 +43,17 @@ export default class CategoriaController {
   // Editar categoria
   async edit(req, res) {
     const { nome } = req.body;
-    await Categoria.findByIdAndUpdate(req.params.id, { nome });
+
+    let dadosAtualizar = { nome };
+
+    // Se uma nova imagem for enviada, substitui
+    if (req.file) {
+      dadosAtualizar.imagemBase64 = req.file.buffer.toString("base64");
+      dadosAtualizar.mimetype = req.file.mimetype;
+    }
+
+    await Categoria.findByIdAndUpdate(req.params.id, dadosAtualizar);
+
     res.redirect("/categoria/lst");
   }
 
